@@ -1,57 +1,95 @@
 import datetime
 
-is_waiting = False
-is_driving = True
-
-
-
 def taximetro():
-    base = int(3.50) #tarifa base
-    taxi_is_waiting = float(0.02) #por segundo
-    taxi_is_driving = float(0.05) #por segundo
+    print("Bienvenido al TAXÍMETRO. Para empezar el viaje, seleccione la tarifa deseada:")
+    print("A = Tarifa diurna.")
+    print("B = Tarifa nocturna.")
+    print("-----------------\n")
 
-    total_drived_total = 0
+    select_fee = input("Escriba A ó B: ")
+
+    if select_fee == "A":
+        base = 3.50
+    elif select_fee == "B":
+        base = 4.50
+    else:
+        print("No ha seleccionado una opción correcta.")
+        select_fee = input("Escriba A ó B: ")
+
+    taxi_is_waiting = 0.02  # Tarifa por segundo esperando
+    taxi_is_driving = 0.05  # Tarifa por segundo conduciendo
+
+    total_drived_total = 0 
     total_waited_total = 0
-    print("Bienvenido, porfavor ingrese los datos solicitados...")
-
-    actual_time = datetime.datetime.now()
-    starting_at = actual_time
-    started_time = actual_time.strftime('%H:%M:%S')
-
-    print(f"Hora de entrada: {started_time}\n")
-
-    selection = input("Actualmente estás conduciendo, escribe W cuando estés esperando: ")
 
     while True:
-
-        if selection == "W":
-            is_driving = False
-            drived_time = datetime.datetime.now()
-            print(f"El tiempo conducido fue: {drived_time}\n")
-            total = drived_time - starting_at
-            total_seconds = total.total_seconds()
-            total_drived_total = total_drived_total + total_seconds
-            print(f"El tiempo conducido fue: {total_seconds:.2f} segundos")
-            selection = input("Actualmente estás esperando, escribe D cuando estés conduciendo, o Q para salir:  ")
-
-        elif selection == "D":
+        question = input("Quiere empezar el trayecto? (S ó N): ")
+        print("-----------------\n")
+        if question == "S":
             is_driving = True
-            waited_time = datetime.datetime.now()
-            print(f"El tiempo esperado fue: {waited_time}\n")
-            total_waited = waited_time - drived_time
-            waited_total_seconds = total_waited.total_seconds()
-            total_waited_total = total_waited_total + waited_total_seconds
-            print(f"El tiempo esperado fue: {waited_total_seconds:.2f} segundos")
-            selection = input("Actualmente estás conduciendo, escribe W cuando estés esperando, o Q para salir: ")
+            break
+        elif question == "N":
+            is_driving = False
+            break
+        else:
+            print("No ha seleccionado ninguna opción correcta. Inténtelo de nuevo.")
+
+    starting_at = datetime.datetime.now() #usamos el método datetime para averiguar la hora actual
+    started_time = starting_at.strftime('%H:%M:%S') # cambiamos de formato fecha a string
+
+    print(f"El trayecto ha empezado. Hora de entrada: {started_time}\n")
+    
+    last_time = starting_at  # Guarda el tiempo del último cambio de estado
+
+    while True:
+        if is_driving == True:
+            selection = input("Actualmente estás CONDUCIENDO, escribe W cuando estés esperando, o Q para salir: ")
+        else:
+            selection = input("Actualmente estás ESPERANDO, escribe D cuando estés conduciendo, o Q para salir: ")
+
+        current_time = datetime.datetime.now()
+        elapsed_time = (current_time - last_time).total_seconds()  # Tiempo transcurrido desde el último cambio
+
+        if selection == "W" and is_driving:
+            total_drived_total += elapsed_time
+            print(f"Tiempo total conducido: {total_drived_total:.2f} segundos\n\n")
+            is_driving = False
+            last_time = current_time  # Guardar el momento en que empezó a esperar
+
+        elif selection == "D" and not is_driving:
+            total_waited_total += elapsed_time
+            print(f"Tiempo total esperado: {total_waited_total:.2f} segundos\n\n")
+            is_driving = True
+            last_time = current_time  # Guardar el momento en que empezó a conducir
 
         elif selection == "Q":
-            print(f"El tiemp esperado fue: {total_waited_total:.2f} y el tiempo conducido fue: {total_drived_total:.2f}")
-            break
+            if is_driving:
+                total_drived_total += elapsed_time
+            else:
+                total_waited_total += elapsed_time
+
+            print(f"Tiempo total esperado: {total_waited_total:.2f} segundos\n")
+            print(f"Tiempo total conducido: {total_drived_total:.2f} segundos\n")
+
+            # Cálculo del costo final
+            total_cost = base + (total_drived_total * taxi_is_driving) + (total_waited_total * taxi_is_waiting)
+            print(f"Precio total del viaje: {total_cost:.2f}€\n")
+            print("------------------------------------------")
+            answer = input("Quiere volver a empezar un viaje? (S ó N): ")
+            if answer == "S":
+                taximetro()
+            else:
+                print("Gracias por usar el Taxímetro. Adios")
+                break
 
         else:
             print("Entrada no válida, por favor ingresa 'W', 'D' o 'Q'.")
 
 taximetro()
+
+
+#TODO:
+    # Corregir: cuando ingresamos un valor incorrecto en la linea 17, después no calcula correctamente el importe total, como que no coge bien la tarifa base
 
 
 # El funcionamiento del taxímetro: 
@@ -67,72 +105,7 @@ taximetro()
     # f: Especifica que el número debe ser tratado como un número flotante (es decir, un número con decimales).ç
 
 
-# TODO:
-    # corregir el tiempo antes de Q, porque ahora no se está sumando, se queda el aire
 
-# import datetime
-
-# def taximetro():
-#     base = 3.50  # tarifa base
-#     taxi_is_waiting = 0.02  # por segundo
-#     taxi_is_driving = 0.05  # por segundo
-
-#     total_drived_total = 0
-#     total_waited_total = 0
-
-#     print("Bienvenido, por favor ingrese los datos solicitados...")
-
-#     actual_time = datetime.datetime.now()
-#     starting_at = actual_time
-#     started_time = actual_time.strftime('%H:%M:%S')
-
-#     print(f"Hora de entrada: {started_time}\n")
-
-#     is_driving = True  # Inicializamos como conduciendo
-#     drived_time = starting_at  # El primer tiempo de conducción es la hora de inicio
-#     waited_time = None  # El tiempo de espera inicialmente es None
-
-#     selection = input("Actualmente estás conduciendo, escribe W cuando estés esperando: ")
-
-#     while True:
-#         if selection == "W" and is_driving:
-#             is_driving = False
-#             drived_time = datetime.datetime.now()
-#             print(f"El tiempo conducido fue: {drived_time - starting_at}\n")
-#             total_seconds = (drived_time - starting_at).total_seconds()
-#             total_drived_total += total_seconds
-#             print(f"El tiempo conducido fue: {total_seconds:.2f} segundos")
-#             selection = input("Actualmente estás esperando, escribe D cuando estés conduciendo, o Q para salir: ")
-
-#         elif selection == "D" and not is_driving:
-#             is_driving = True
-#             waited_time = datetime.datetime.now()
-#             print(f"El tiempo esperando fue: {waited_time - drived_time}\n")
-#             total_waited = (waited_time - drived_time).total_seconds()
-#             total_waited_total += total_waited
-#             print(f"El tiempo esperado fue: {total_waited:.2f} segundos")
-#             selection = input("Actualmente estás conduciendo, escribe W cuando estés esperando, o Q para salir: ")
-
-#         elif selection == "Q":
-#             # Si estamos esperando, calculamos el tiempo que ha pasado desde que comenzamos a esperar
-#             if not is_driving and waited_time is not None:
-#                 waited_time = datetime.datetime.now()
-#                 total_waited = (waited_time - drived_time).total_seconds()
-#                 total_waited_total += total_waited
-
-#             # Si estamos conduciendo, calculamos el tiempo que ha pasado desde que comenzamos a conducir
-#             if is_driving and drived_time is not None:
-#                 drived_time = datetime.datetime.now()
-#                 total_drived = (drived_time - starting_at).total_seconds()
-#                 total_drived_total += total_drived
-
-#             print(f"El tiempo total esperado fue: {total_waited_total:.2f} segundos.")
-#             print(f"El tiempo total conducido fue: {total_drived_total:.2f} segundos.")
-#             print("¡Gracias por usar el taxímetro!")
-#             break  # Sale del bucle
-
-#         else:
-#             print("Entrada no válida, por favor ingresa 'W', 'D' o 'Q'.")
-#             selection = input("Actualmente estás conduciendo, escribe W cuando estés esperando, o Q para salir: ")
-
-# taximetro()
+#FUENTES:
+    # traer hora actual: https://www.codigopiton.com/como-obtener-la-hora-actual-en-python/#:~:text=Para%20obtener%20la%20hora%20actual,se%20utiliza%20la%20funci%C3%B3n%20strftime%20.
+    # ¿Qué es el logging? https://atareao.es/pyldora/tus-logs-en-python-de-forma-eficiente/#:~:text=El%20logging%20en%20Python%20es,diagnosticar%20problemas%20en%20tiempo%20real.

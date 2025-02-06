@@ -1,20 +1,38 @@
 import datetime
+import logging
+from logging_config import setup_logging
+
+setup_logging()
+
+# def format_time(seconds):
+#     minutes = int(seconds // 60)  # obtenemos los minutos
+#     remaining_seconds = seconds % 60  # obtenemos los segundos restantes
+#     return f"{minutes} minutos {remaining_seconds:.0f} segundos" if minutes > 0 else f"{seconds:.0f} segundos"
+
+
+# format_time(seconds) convertido a función lambda, es como un operador ternario de javascript => condición ? expresión_si_verdadero : expresión_si_falso;
+format_time = lambda seconds: f"{int(seconds // 60)} minutos {seconds % 60:.0f} segundos." if seconds >= 60 else f"{seconds:.0f} segundos."
+
 
 def taximetro():
+
     print("Bienvenido al TAXÍMETRO. Para empezar el viaje, seleccione la tarifa deseada:")
-    print("A = Tarifa diurna.")
-    print("B = Tarifa nocturna.")
+    print("A = Tarifa diurna. (tarifa base: 3.50€)")
+    print("B = Tarifa nocturna. (tarifa base: 4.50€)")
     print("-----------------\n")
 
-    select_fee = input("Escriba A ó B: ")
-
-    if select_fee == "A":
-        base = 3.50
-    elif select_fee == "B":
-        base = 4.50
-    else:
-        print("No ha seleccionado una opción correcta.")
+    # si ingresamos un valor incorrecto, entramos en bucle hasta que sea correcto y ya seguimos con el codigo
+    while True:
         select_fee = input("Escriba A ó B: ")
+        if select_fee == "A":
+            base = 3.50
+            break
+        elif select_fee == "B":
+            base = 4.50
+            break
+        else:
+            logging.error(f'Selección inválida en select_fee: {select_fee}.')
+            print("No ha seleccionado una opción correcta. Inténtelo de nuevo.")
 
     taxi_is_waiting = 0.02  # Tarifa por segundo esperando
     taxi_is_driving = 0.05  # Tarifa por segundo conduciendo
@@ -32,6 +50,7 @@ def taximetro():
             is_driving = False
             break
         else:
+            logging.error(f'Selección inválida en question: {question} => Opciones válidas: S ó N.')
             print("No ha seleccionado ninguna opción correcta. Inténtelo de nuevo.")
 
     starting_at = datetime.datetime.now() #usamos el método datetime para averiguar la hora actual
@@ -52,7 +71,11 @@ def taximetro():
 
         if selection == "W" and is_driving:
             total_drived_total += elapsed_time
-            print(f"Tiempo total conducido: {total_drived_total:.2f} segundos\n\n")
+            if total_drived_total >= 60:
+                print(f"Tiempo total conducido: {format_time(total_drived_total)}\n\n")
+            else:
+                print(f"Tiempo total conducido: {total_drived_total:.2f} segundos\n\n")
+
             is_driving = False
             last_time = current_time  # Guardar el momento en que empezó a esperar
 
@@ -68,8 +91,8 @@ def taximetro():
             else:
                 total_waited_total += elapsed_time
 
-            print(f"Tiempo total esperado: {total_waited_total:.2f} segundos\n")
-            print(f"Tiempo total conducido: {total_drived_total:.2f} segundos\n")
+            print(f"Tiempo total esperado: {format_time(total_waited_total)}\n")
+            print(f"Tiempo total conducido: {format_time(total_drived_total)}\n")
 
             # Cálculo del costo final
             total_cost = base + (total_drived_total * taxi_is_driving) + (total_waited_total * taxi_is_waiting)
@@ -83,6 +106,7 @@ def taximetro():
                 break
 
         else:
+            logging.error(f'Entrada no válida. Entradas aceptadas: W, D, Q.')
             print("Entrada no válida, por favor ingresa 'W', 'D' o 'Q'.")
 
 taximetro()

@@ -1,8 +1,23 @@
 import datetime
 import logging
 from logging_config import setup_logging
+from tkinter import *
 
 setup_logging()
+
+my_program = Tk()
+
+my_program.title("Taxímetro de Alla")
+#my_program.geometry("750x350")
+my_program.config(bg="black")
+
+a_base = Frame()
+a_base.pack()
+a_base.config(bg="green")
+a_base.config(width="650", height="350")
+
+my_program.mainloop() # bucle infinito que hace que el programa funcione de forma continua
+
 
 # def format_time(seconds):
 #     minutes = int(seconds // 60)  # obtenemos los minutos
@@ -109,11 +124,8 @@ def taximetro():
             logging.error(f'Entrada no válida. Entradas aceptadas: W, D, Q.')
             print("Entrada no válida, por favor ingresa 'W', 'D' o 'Q'.")
 
-taximetro()
+#taximetro()
 
-
-#TODO:
-    # Corregir: cuando ingresamos un valor incorrecto en la linea 17, después no calcula correctamente el importe total, como que no coge bien la tarifa base
 
 
 # El funcionamiento del taxímetro: 
@@ -133,3 +145,4 @@ taximetro()
 #FUENTES:
     # traer hora actual: https://www.codigopiton.com/como-obtener-la-hora-actual-en-python/#:~:text=Para%20obtener%20la%20hora%20actual,se%20utiliza%20la%20funci%C3%B3n%20strftime%20.
     # ¿Qué es el logging? https://atareao.es/pyldora/tus-logs-en-python-de-forma-eficiente/#:~:text=El%20logging%20en%20Python%20es,diagnosticar%20problemas%20en%20tiempo%20real.
+    # ¿Qué es GUI, interfaz gráfica, usamos Tkinter?: https://www.youtube.com/watch?v=hTUJC8HsC2I

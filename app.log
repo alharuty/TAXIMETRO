@@ -3,3 +3,6 @@
 2025-02-06 13:37:48,761 - ERROR - Selección inválida: L.
 2025-02-06 13:42:19,585 - INFO - Selección inválida: H.
 2025-02-06 13:45:45,299 - ERROR - Selección inválida en question: Q
+2025-02-07 11:44:07,273 - ERROR - Selección inválida en select_fee: d.
+2025-02-10 10:01:27,561 - ERROR - Selección inválida en select_fee: .
+2025-02-10 10:01:27,694 - ERROR - Selección inválida en select_fee: .

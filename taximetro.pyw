@@ -3,13 +3,15 @@ from tkinter import messagebox
 import datetime
 
 class Taximetro:
+    historial = []
+
     def __init__(self, root):
         self.root = root
         self.root.title("Taxímetro de Alla")
         self.root.geometry("600x400")
 
         self.setup()
-    
+
     def setup(self):
 
         self.day_base = 3.50
@@ -32,7 +34,7 @@ class Taximetro:
         Label(self.my_frame, text="BIENVENIDO AL TAXÍMETRO.\nPara empezar el viaje debe seleccionar la tarifa base (diurna o nocturna):",
             fg="green", font=("Arial", 10), pady=10, padx=20).pack(expand=True)
 
-        # Crear otro frame para los botones y usar pack()
+        # creamos otro frame para los botones y usar pack()
         self.buttons_frame = Frame(self.root)
         self.buttons_frame.pack()
 
@@ -48,8 +50,6 @@ class Taximetro:
 
         self.label_status = Label(self.root, text="Estado: Esperando selección de tarifa", fg="black")
         self.label_status.pack(pady=10)
-
-        
 
     def selected_base(self, base):
         self.tarifa_base = base
@@ -87,7 +87,6 @@ class Taximetro:
     def driving(self):
         current_time = datetime.datetime.now()
 
-        # Iniciar tiempo solo si es la primera vez que se presiona
         if self.start_time is None:
             self.start_time = current_time
             self.label_start_time = Label(self.root, text=f"Hora de inicio del trayecto: {self.start_time.strftime('%H:%M:%S')}", font=("Arial", 10, "bold"))
@@ -96,7 +95,7 @@ class Taximetro:
         elapsed_time = 0
         if not self.is_driving and self.last_time is not None:
             elapsed_time = (current_time - self.last_time).total_seconds()
-            self.total_waited_total += elapsed_time  # Sumar tiempo de espera
+            self.total_waited_total += elapsed_time
         
         self.last_time = current_time
         self.is_driving = True
@@ -106,7 +105,6 @@ class Taximetro:
     def waiting(self):
         current_time = datetime.datetime.now()
 
-        # Iniciar tiempo solo si es la primera vez que se presiona
         if self.start_time is None:
             self.start_time = current_time
             self.label_start_time = Label(self.root, text=f"Hora de inicio del trayecto: {self.start_time.strftime('%H:%M:%S')}", font=("Arial", 10, "bold"))
@@ -115,7 +113,7 @@ class Taximetro:
         elapsed_time = 0
         if self.is_driving and self.last_time is not None:
             elapsed_time = (current_time - self.last_time).total_seconds()
-            self.total_drived_total += elapsed_time  # Sumar tiempo de conducción
+            self.total_drived_total += elapsed_time
 
         self.last_time = current_time
         self.is_driving = False
@@ -124,7 +122,6 @@ class Taximetro:
     def finish_trip(self):
         current_time = datetime.datetime.now()
 
-        # Asegurar que se cuenta el último periodo de conducción o espera
         if self.last_time is not None:
             elapsed_time = (current_time - self.last_time).total_seconds()
             if self.is_driving:
@@ -141,34 +138,53 @@ class Taximetro:
         self.label_status2.pack_forget()
         self.label_status.pack_forget()
 
+        if self.start_time != None:
+            trip_data = {
+                "hora_inicio": self.start_time.strftime('%H:%M:%S'),
+                "hora_fin": current_time.strftime('%H:%M:%S'),
+                "precio_total": total_price
+            }
+            self.historial.append(trip_data)
+
         Label(self.root, text=f"RESUMEN DEL VIAJE\n---------------------------------\n", font=("Arial", 12, "bold")).pack()
         Label(self.root, text=f"Tarifa base seleccionada: {self.tarifa_base}€\n", bg="#a6df9a").pack()
         Label(self.root, text=f"Tiempo total conducido: {self.total_drived_total:.2f}\nTiempo total esperado: {self.total_waited_total:.2f}\n").pack()
         Label(self.root, text=f"Precio total del viaje: {total_price:.2f}€", font=("Arial", 12, "bold")).pack()
 
-        # Botón para reiniciar
         Button(self.root, text="Reiniciar", command=self.restart_app).pack(pady=5)
 
+        Button(self.root, text="Guardar en el historial", command=self.show_history).pack(pady=5)
+
     def restart_app(self):
-        for widget in self.root.winfo_children():
-            widget.destroy()  # Eliminar todos los widgets antes de resetear
-        self.setup()
+        self.root.destroy()
+        root = Tk()
+        app = Taximetro(root)
+        root.mainloop()
 
     def close_app(self):
-        # preguntamos si está seguro de que quiere salir
-        #response = messagebox.askyesno("Confirmar salida", "¿Estás seguro de que quieres salir?")
+        response = messagebox.askyesno("Confirmar salida", "¿Estás seguro de que quieres salir?")
         
-        #if response:  # si la respuesta es Sí
-            #self.root.destroy()  # Cierra la ventana y termina el programa
-        self.root.destroy()
+        if response:
+            self.root.destroy()
 
-# Ejecutar la aplicación
+    def show_history(self):
+        # creamos una nueva ventana para mostrar el historial
+        history_window = Toplevel(self.root)
+        history_window.title("Historial de Trayectos")
+        history_window.geometry("400x300")
+
+        for i, trip in enumerate(self.historial):
+            trip_info = f"Trayecto {i+1}: {trip['hora_inicio']} - {trip['hora_fin']} | Precio: {trip['precio_total']}€"
+            Label(history_window, text=trip_info, font=("Arial", 10), anchor="w").pack(pady=2)
+
+        with open("historial.txt", "w") as f: #abrimos el archivo historial.txt en modo de write
+                for trip in self.historial:
+                    f.write(f"Hora inicio: {trip['hora_inicio']} | Hora fin: {trip['hora_fin']} | Precio: {trip['precio_total']}€\n")
+
+        Button(history_window, text="Cerrar", command=history_window.destroy).pack(pady=10)
+
+
 if __name__ == "__main__":
     root = Tk()
     app = Taximetro(root)
     root.mainloop()
-
-
-
-# NOTAS
-# 1. En un mismo class, no se puede usar grid y pack a la vez, hay que elegir uno

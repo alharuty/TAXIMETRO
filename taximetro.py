@@ -1,22 +1,6 @@
 import datetime
 import logging
 from logging_config import setup_logging
-from tkinter import *
-
-setup_logging()
-
-my_program = Tk()
-
-my_program.title("Taxímetro de Alla")
-#my_program.geometry("750x350")
-my_program.config(bg="black")
-
-a_base = Frame()
-a_base.pack()
-a_base.config(bg="green")
-a_base.config(width="650", height="350")
-
-my_program.mainloop() # bucle infinito que hace que el programa funcione de forma continua
 
 
 # def format_time(seconds):

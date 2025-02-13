@@ -36,6 +36,8 @@ Este código abrirá la interfaz gráfica, y tiene las mismas funcionalidades qu
 
 En ambos métodos se puede salir de la app en cualquier momento ó volver a realicar un nuevo trayecto.
 
+Además en la version GUI, se guarda un historial de trayectos en el archivo historial.txt
+
 Puedes ver el diagrama de actividad aquí:
 
 ![Diagrama](diagrama-actividad.png)

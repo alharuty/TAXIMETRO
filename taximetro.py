@@ -31,6 +31,7 @@ def taximetro():
     print("-----------------------------------------")
     taxi_is_waiting = 0.02
     taxi_is_driving = 0.05
+    km_price = 1
 
     total_drived_total = 0 
     total_waited_total = 0
@@ -84,13 +85,26 @@ def taximetro():
             else:
                 total_waited_total += elapsed_time
 
+            km = input("Ingrese los kilómetros del trayecto: ")
+            if km.isnumeric():
+                km = float(km)
+                total_km_price = km * km_price
+            elif km.isalpha():
+                print("Porfavor ingresa un número.")
+            else:
+                print("Porfavor intentelo de nuevo: ")
+
             print("\n-----------------------------------------")
-            print(f"Tiempo total conducido: {format_time(total_drived_total)} | {total_drived_total * taxi_is_driving:.2f}€\n")
-            print(f"Tiempo total esperado: {format_time(total_waited_total)}  | {total_waited_total * taxi_is_waiting:.2f}€\n")
 
-            total_cost = base + (total_drived_total * taxi_is_driving) + (total_waited_total * taxi_is_waiting)
-            print(f"Tarifa base: {base}")
+            total_drived_price =  total_drived_total * taxi_is_driving
+            total_waited_price = total_waited_total * taxi_is_waiting
+            total_total_price = total_drived_price + total_waited_price
 
+            print(f"Tarifa base: {base}€")
+            print(f"Precio total trayectoria: {total_total_price:.2f}€")
+            print(f"Precio total de kms: {total_km_price}€")
+
+            total_cost = base + (total_drived_total * taxi_is_driving) + (total_waited_total * taxi_is_waiting) + total_km_price
             mensaje = f"Precio total del viaje: {total_cost:.2f}€"
             borde = "-" * (len(mensaje) + 2)
 
@@ -98,36 +112,18 @@ def taximetro():
             print(f"│ {mensaje} │")
             print("╰" + borde + "╯")
             print("------------------------------------------")
-            answer = input("Quiere volver a empezar un viaje? (S ó N): ")
-            if answer == "S":
-                taximetro()
-            else:
-                print("\nGracias por usar el Taxímetro. Adios")
-                return
+            while True:
+                # Lógica del viaje...
+                answer = input("Quiere volver a empezar un viaje? (S ó N): ")
+                if answer == "S":
+                    taximetro()
+                elif answer == "N":
+                    print("\nGracias por usar el Taxímetro. Adios")
+                    return
+
 
         else:
             logging.error(f'Entrada no válida. Entradas aceptadas: D, E, F.')
             print("Entrada no válida, por favor ingresa 'C', 'E' o 'F'.")
 
 taximetro()
-
-
-
-# El funcionamiento del taxímetro: 
-# Cuando inicializamos el taxímetro empieza a contar y tiene en cuenta que se ha empezado a conducir, es decir, se empieza a contar tiempo conducido nada mas entrar en el taxi
-# Cada vez que cambiemos de W a D, se cuenta el tiempo pasado y lo suma al temporizador correspondiente. 
-
-# usamos el método .datetime.now() de la dependencia datetime para contar los segundos transcurridos
-# usamos el método .total_seconds() para pasar de formato fecha a segundos
-
-# usamos el formato :.2f para especificar que el número dado es un flotante y que queremos mostrar 2 decimales:
-    # : : Indica que a continuación se proporcionará una especificación de formato.
-    # .2 : Significa que se debe mostrar el número con dos decimales.
-    # f: Especifica que el número debe ser tratado como un número flotante (es decir, un número con decimales).ç
-
-
-
-#FUENTES:
-    # traer hora actual: https://www.codigopiton.com/como-obtener-la-hora-actual-en-python/#:~:text=Para%20obtener%20la%20hora%20actual,se%20utiliza%20la%20funci%C3%B3n%20strftime%20.
-    # ¿Qué es el logging? https://atareao.es/pyldora/tus-logs-en-python-de-forma-eficiente/#:~:text=El%20logging%20en%20Python%20es,diagnosticar%20problemas%20en%20tiempo%20real.
-    # ¿Qué es GUI, interfaz gráfica, usamos Tkinter?: https://www.youtube.com/watch?v=hTUJC8HsC2I

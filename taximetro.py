@@ -4,18 +4,17 @@ from logging_config import setup_logging
 
 setup_logging()
 
-format_time = lambda seconds: f"{int(seconds // 60)} minutos {seconds % 60:.0f} segundos." if seconds >= 60 else f"{seconds:.0f} segundos."
+format_time = lambda seconds: f"{int(seconds // 60)} min {seconds % 60:.0f} seg." if seconds >= 60 else f"{seconds:.0f} seg."
 
 def taximetro():
 
-    print("Bienvenido al TAXÍMETRO. Para empezar el viaje, seleccione la tarifa deseada:")
+    print("\nBienvenido al TAXÍMETRO. Para empezar el viaje, seleccione la tarifa deseada:\n")
     print("A = Tarifa diurna. (tarifa base: 3.50€)")
     print("B = Tarifa nocturna. (tarifa base: 4.50€)")
-    print("-----------------\n")
-
+    
     # si ingresamos un valor incorrecto, entramos en bucle hasta que sea correcto y ya seguimos con el codigo
     while True:
-        select_fee = input("Escriba A ó B. (Q para salir): ")
+        select_fee = input("\nEscriba A ó B. (Q para salir): ")
         if select_fee == "A":
             base = 3.50
             break
@@ -23,12 +22,13 @@ def taximetro():
             base = 4.50
             break
         elif select_fee == "Q":
-            print("Gracias por usar el Taxímetro. Adios")
+            print("\nGracias por usar el Taxímetro. Adios")
             return
         else:
             logging.error(f'Selección inválida en select_fee: {select_fee}.')
-            print("No ha seleccionado una opción correcta. Inténtelo de nuevo.")
+            print("No ha seleccionado una opción correcta. Inténtelo de nuevo. (A, B ó Q)")
 
+    print("-----------------------------------------")
     taxi_is_waiting = 0.02
     taxi_is_driving = 0.05
 
@@ -36,9 +36,9 @@ def taximetro():
     total_waited_total = 0
 
     while True:
-        print("\nVa a empezar el trayecto.")
+        print(f"\nVa a empezar el trayecto con la tarifa base: {base}€.")
         question = input("\nC: Empezar CONDUCIENDO.\nE: Empezar ESPERANDO\nQ: Salir del trayecto\n\nEliga la opción deseada: ")
-        print("-----------------\n")
+        print("-----------------------------------------\n")
         if question == "C":
             is_driving = True
             break
@@ -46,7 +46,7 @@ def taximetro():
             is_driving = False
             break
         elif question == "Q":
-            print("Gracias por usar el Taxímetro. Adios")
+            print("Gracias por usar el Taxímetro. Adios\n")
             return
         else:
             logging.error(f'Selección inválida en question: {question} => Opciones válidas: C , E ó Q.')
@@ -61,7 +61,7 @@ def taximetro():
 
     while True:
         if is_driving == True:
-            selection = input("Actualmente estás CONDUCIENDO, escribe E cuando estés esperando, o Q para finalizar.: ")
+            selection = input("Actualmente estás CONDUCIENDO, escribe E cuando estés esperando, o Q para finalizar: ")
         else:
             selection = input("Actualmente estás ESPERANDO, escribe C cuando estés conduciendo, o Q para finalizar: ")
 
@@ -84,17 +84,25 @@ def taximetro():
             else:
                 total_waited_total += elapsed_time
 
-            print(f"Tiempo total esperado: {format_time(total_waited_total)}\n")
-            print(f"Tiempo total conducido: {format_time(total_drived_total)}\n")
+            print("\n-----------------------------------------")
+            print(f"Tiempo total conducido: {format_time(total_drived_total)} | {total_drived_total * taxi_is_driving:.2f}€\n")
+            print(f"Tiempo total esperado: {format_time(total_waited_total)}  | {total_waited_total * taxi_is_waiting:.2f}€\n")
 
             total_cost = base + (total_drived_total * taxi_is_driving) + (total_waited_total * taxi_is_waiting)
-            print(f"Precio total del viaje: {total_cost:.2f}€\n")
+            print(f"Tarifa base: {base}")
+
+            mensaje = f"Precio total del viaje: {total_cost:.2f}€"
+            borde = "-" * (len(mensaje) + 2)
+
+            print("\n╭" + borde + "╮")
+            print(f"│ {mensaje} │")
+            print("╰" + borde + "╯")
             print("------------------------------------------")
             answer = input("Quiere volver a empezar un viaje? (S ó N): ")
             if answer == "S":
                 taximetro()
             else:
-                print("Gracias por usar el Taxímetro. Adios")
+                print("\nGracias por usar el Taxímetro. Adios")
                 break
 
         else:

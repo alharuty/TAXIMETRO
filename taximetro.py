@@ -4,15 +4,7 @@ from logging_config import setup_logging
 
 setup_logging()
 
-# def format_time(seconds):
-#     minutes = int(seconds // 60)  # obtenemos los minutos
-#     remaining_seconds = seconds % 60  # obtenemos los segundos restantes
-#     return f"{minutes} minutos {remaining_seconds:.0f} segundos" if minutes > 0 else f"{seconds:.0f} segundos"
-
-
-# format_time(seconds) convertido a función lambda, es como un operador ternario de javascript => condición ? expresión_si_verdadero : expresión_si_falso;
 format_time = lambda seconds: f"{int(seconds // 60)} minutos {seconds % 60:.0f} segundos." if seconds >= 60 else f"{seconds:.0f} segundos."
-
 
 def taximetro():
 
@@ -37,8 +29,8 @@ def taximetro():
             logging.error(f'Selección inválida en select_fee: {select_fee}.')
             print("No ha seleccionado una opción correcta. Inténtelo de nuevo.")
 
-    taxi_is_waiting = 0.02  # Tarifa por segundo esperando
-    taxi_is_driving = 0.05  # Tarifa por segundo conduciendo
+    taxi_is_waiting = 0.02
+    taxi_is_driving = 0.05
 
     total_drived_total = 0 
     total_waited_total = 0
@@ -60,12 +52,12 @@ def taximetro():
             logging.error(f'Selección inválida en question: {question} => Opciones válidas: C , E ó Q.')
             print("No ha seleccionado ninguna opción correcta. Inténtelo de nuevo.")
 
-    starting_at = datetime.datetime.now() #usamos el método datetime para averiguar la hora actual
-    started_time = starting_at.strftime('%H:%M:%S') # cambiamos de formato fecha a string
+    starting_at = datetime.datetime.now()
+    started_time = starting_at.strftime('%H:%M:%S')
 
     print(f"El trayecto ha empezado. Hora de entrada: {started_time}\n")
     
-    last_time = starting_at  # Guarda el tiempo del último cambio de estado
+    last_time = starting_at  # guarda el tiempo del último cambio de estado
 
     while True:
         if is_driving == True:
@@ -74,23 +66,17 @@ def taximetro():
             selection = input("Actualmente estás ESPERANDO, escribe C cuando estés conduciendo, o Q para finalizar: ")
 
         current_time = datetime.datetime.now()
-        elapsed_time = (current_time - last_time).total_seconds()  # Tiempo transcurrido desde el último cambio
+        elapsed_time = (current_time - last_time).total_seconds()  # tiempo transcurrido desde el último cambio
 
         if selection == "E" and is_driving:
             total_drived_total += elapsed_time
-            if total_drived_total >= 60:
-                print(f"Tiempo total conducido: {format_time(total_drived_total)}\n\n")
-            else:
-                print(f"Tiempo total conducido: {total_drived_total:.2f} segundos\n\n")
-
             is_driving = False
-            last_time = current_time  # Guardar el momento en que empezó a esperar
+            last_time = current_time
 
         elif selection == "C" and not is_driving:
             total_waited_total += elapsed_time
-            print(f"Tiempo total esperado: {total_waited_total:.2f} segundos\n\n")
             is_driving = True
-            last_time = current_time  # Guardar el momento en que empezó a conducir
+            last_time = current_time
 
         elif selection == "Q":
             if is_driving:
@@ -101,7 +87,6 @@ def taximetro():
             print(f"Tiempo total esperado: {format_time(total_waited_total)}\n")
             print(f"Tiempo total conducido: {format_time(total_drived_total)}\n")
 
-            # Cálculo del costo final
             total_cost = base + (total_drived_total * taxi_is_driving) + (total_waited_total * taxi_is_waiting)
             print(f"Precio total del viaje: {total_cost:.2f}€\n")
             print("------------------------------------------")

@@ -44,19 +44,20 @@ def taximetro():
     total_waited_total = 0
 
     while True:
-        question = input("Quiere empezar el trayecto? (S ó N) (Q para salir): ")
+        print("\nVa a empezar el trayecto.")
+        question = input("\nC: Empezar CONDUCIENDO.\nE: Empezar ESPERANDO\nQ: Salir del trayecto\n\nEliga la opción deseada: ")
         print("-----------------\n")
-        if question == "S":
+        if question == "C":
             is_driving = True
             break
-        elif question == "N":
+        elif question == "E":
             is_driving = False
             break
         elif question == "Q":
             print("Gracias por usar el Taxímetro. Adios")
             return
         else:
-            logging.error(f'Selección inválida en question: {question} => Opciones válidas: S ó N.')
+            logging.error(f'Selección inválida en question: {question} => Opciones válidas: C , E ó Q.')
             print("No ha seleccionado ninguna opción correcta. Inténtelo de nuevo.")
 
     starting_at = datetime.datetime.now() #usamos el método datetime para averiguar la hora actual
@@ -68,14 +69,14 @@ def taximetro():
 
     while True:
         if is_driving == True:
-            selection = input("Actualmente estás CONDUCIENDO, escribe W cuando estés esperando, o Q para salir: ")
+            selection = input("Actualmente estás CONDUCIENDO, escribe E cuando estés esperando, o Q para finalizar.: ")
         else:
-            selection = input("Actualmente estás ESPERANDO, escribe D cuando estés conduciendo, o Q para salir: ")
+            selection = input("Actualmente estás ESPERANDO, escribe C cuando estés conduciendo, o Q para finalizar: ")
 
         current_time = datetime.datetime.now()
         elapsed_time = (current_time - last_time).total_seconds()  # Tiempo transcurrido desde el último cambio
 
-        if selection == "W" and is_driving:
+        if selection == "E" and is_driving:
             total_drived_total += elapsed_time
             if total_drived_total >= 60:
                 print(f"Tiempo total conducido: {format_time(total_drived_total)}\n\n")
@@ -85,7 +86,7 @@ def taximetro():
             is_driving = False
             last_time = current_time  # Guardar el momento en que empezó a esperar
 
-        elif selection == "D" and not is_driving:
+        elif selection == "C" and not is_driving:
             total_waited_total += elapsed_time
             print(f"Tiempo total esperado: {total_waited_total:.2f} segundos\n\n")
             is_driving = True
@@ -112,8 +113,8 @@ def taximetro():
                 break
 
         else:
-            logging.error(f'Entrada no válida. Entradas aceptadas: W, D, Q.')
-            print("Entrada no válida, por favor ingresa 'W', 'D' o 'Q'.")
+            logging.error(f'Entrada no válida. Entradas aceptadas: D, E, Q.')
+            print("Entrada no válida, por favor ingresa 'C', 'E' o 'Q'.")
 
 taximetro()
 

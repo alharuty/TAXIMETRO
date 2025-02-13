@@ -9,3 +9,6 @@
 2025-02-13 10:51:34,793 - ERROR - Selección inválida en select_fee: f.
 2025-02-13 10:51:35,575 - ERROR - Selección inválida en select_fee: d.
 2025-02-13 10:51:36,523 - ERROR - Selección inválida en select_fee: c.
+2025-02-13 11:10:02,780 - ERROR - Selección inválida en question: q => Opciones válidas: S ó N.
+2025-02-13 11:13:24,274 - ERROR - Selección inválida en question: r => Opciones válidas: C , E ó Q.
+2025-02-13 11:13:59,866 - ERROR - Entrada no válida. Entradas aceptadas: D, E, Q.

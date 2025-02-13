@@ -110,24 +110,3 @@ def taximetro():
             print("Entrada no válida, por favor ingresa 'C', 'E' o 'F'.")
 
 taximetro()
-
-
-
-# El funcionamiento del taxímetro: 
-# Cuando inicializamos el taxímetro empieza a contar y tiene en cuenta que se ha empezado a conducir, es decir, se empieza a contar tiempo conducido nada mas entrar en el taxi
-# Cada vez que cambiemos de W a D, se cuenta el tiempo pasado y lo suma al temporizador correspondiente. 
-
-# usamos el método .datetime.now() de la dependencia datetime para contar los segundos transcurridos
-# usamos el método .total_seconds() para pasar de formato fecha a segundos
-
-# usamos el formato :.2f para especificar que el número dado es un flotante y que queremos mostrar 2 decimales:
-    # : : Indica que a continuación se proporcionará una especificación de formato.
-    # .2 : Significa que se debe mostrar el número con dos decimales.
-    # f: Especifica que el número debe ser tratado como un número flotante (es decir, un número con decimales).ç
-
-
-
-#FUENTES:
-    # traer hora actual: https://www.codigopiton.com/como-obtener-la-hora-actual-en-python/#:~:text=Para%20obtener%20la%20hora%20actual,se%20utiliza%20la%20funci%C3%B3n%20strftime%20.
-    # ¿Qué es el logging? https://atareao.es/pyldora/tus-logs-en-python-de-forma-eficiente/#:~:text=El%20logging%20en%20Python%20es,diagnosticar%20problemas%20en%20tiempo%20real.
-    # ¿Qué es GUI, interfaz gráfica, usamos Tkinter?: https://www.youtube.com/watch?v=hTUJC8HsC2I

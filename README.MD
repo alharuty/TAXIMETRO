@@ -1,70 +1,41 @@
+# PROYECTO TAXÍMETRO PARA FACTORIA F5
 
-# 🚕 Proyecto Python: Taxímetro Digital
+### En este proyecto de python, el objetivo es crear un taxímetro.
 
-![Banner Proyectos](https://github.com/user-attachments/assets/bc6e34f7-4031-43dd-8cfc-805c935ba3c4)
+Para instalarlo usa el siguiente código en tu terminal:
+````
+git clone https://github.com/alharuty/TAXIMETRO.git
+````
 
-## 📝 Descripción del Proyecto
+Para arrancar el archivo .py usa el siguiente codigo:
+````
+python taximetro.py
+`````
 
-Este proyecto consiste en desarrollar un prototipo de taxímetro digital utilizando Python. El objetivo es modernizar el sistema de facturación de los taxis y crear un sistema que calcule las tarifas a cobrar a los clientes de manera precisa y eficiente.
+El programa se iniciará en tu terminal, te dará la bienvenida y te dará opciones a elegir que debes seguir correctamente para finalizar el trayecto. Si insertas algún caracter no válida, te saldrá un error para volver a introductir un carácter válido.
 
-## 📊 Niveles de Implementación
+Carácteres válidos:
+| Opción | Acción                           |
+|--------|----------------------------------|
+| A      | Tarifa diurna                   |
+| B      | Tarifa nocturna                 |
+| Q      | Salir de la app antes de elegir una tarifa |
+| C      | Empezar a conducir              |
+| E      | Empezar a esperar               |
+| Q      | Salir de la app antes de empezar un trayecto |
+| F      | Finalizar trayecto y ver resumen |
+| S      | Realizar un nuevo trayecto      |
+| N      | Salir de la app                 |
 
-### 🟢 Nivel Esencial
+Para arrancar el archivo .pyw con la interfaz gráfica usa el siguiente código:
 
-Desarrollar un programa CLI (Interfaz de Línea de Comandos) en Python.
+```
+python taximetro.pyw
+```
+Este código abrirá la interfaz gráfica, y tiene las mismas funcionalidades que en el terminal pero de forma más atractiva para el usuario.
 
-- Al iniciar, el programa debe dar la bienvenida y explicar su funcionamiento.
-- Implementar las siguientes funcionalidades básicas:
-  - Iniciar un trayecto.
-  - Calcular tarifa mientras el taxi está parado (2 céntimos por segundo).
-  - Calcular tarifa mientras el taxi está en movimiento (5 céntimos por segundo).
-  - Finalizar un trayecto y mostrar el total en euros.
-  - Permitir iniciar un nuevo trayecto sin cerrar el programa.
+En ambos métodos se puede salir de la app en cualquier momento ó volver a realicar un nuevo trayecto.
 
-### 🟡 Nivel Medio
+Puedes ver el diagrama de actividad aquí:
 
-- Implementar un sistema de logs para la trazabilidad del código.
-- Agregar tests unitarios para asegurar el correcto funcionamiento del programa.
-- Crear un registro histórico de trayectos pasados en un archivo de texto plano.
-- Permitir la configuración de precios para adaptarse a la demanda actual.
-
-### 🟠 Nivel Avanzado
-
-- Refactorizar el código utilizando un enfoque orientado a objetos (OOP).
-- Implementar un sistema de autenticación con contraseñas para proteger el acceso al programa.
-- Desarrollar una interfaz gráfica de usuario (GUI) para hacer el programa más amigable.
-
-### 🔴 Nivel Experto
-
-- Integrar una base de datos para almacenar los registros de trayectos pasados.
-- Dockerizar la aplicación para facilitar su despliegue y portabilidad.
-- Desarrollar una versión web de la aplicación accesible a través de internet.
-
-## 🛠️ Tecnologías a Utilizar
-
-- Python
-- Git y GitHub para control de versiones
-- Trello o Jira para la gestión del proyecto
-- Bibliotecas adicionales según el nivel de implementación (por ejemplo, logging, unittest, tkinter para GUI, SQLite para base de datos)
-- Docker para containerización (nivel experto)
-- Framework web como Flask o Django para la versión web (nivel experto)
-
-## 📦 Entregables
-
-- Repositorio de GitHub con el código fuente del proyecto.
-- Demostración del CLI desarrollado.
-- Presentación para público no técnico.
-- Presentación técnica del código, destacando fortalezas y debilidades.
-- Enlace al tablero Kanban utilizado para la organización del proyecto.
-
-## ⏳ Plazo de Entrega
-
-Dos semanas a partir de la fecha de inicio del proyecto.
-
-## 💡 Consejos para el Desarrollo
-
-- Comienza con el nivel esencial y ve agregando funcionalidades gradualmente.
-- Utiliza control de versiones desde el inicio del proyecto.
-- Realiza pruebas frecuentes para asegurar el correcto funcionamiento en cada etapa.
-- Documenta tu código y mantén un registro de los cambios y decisiones de diseño.
-- Considera la usabilidad y la experiencia del usuario, incluso en la versión CLI.
+![Diagrama](diagrama-actividad.png)

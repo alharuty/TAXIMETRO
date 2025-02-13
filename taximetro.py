@@ -49,7 +49,7 @@ def taximetro():
             print("Gracias por usar el Taxímetro. Adios\n")
             return
         else:
-            logging.error(f'Selección inválida en question: {question} => Opciones válidas: C , E ó Q.')
+            logging.error(f'Selección inválida en question: {question} => Opciones válidas: C, E ó Q.')
             print("No ha seleccionado ninguna opción correcta. Inténtelo de nuevo.")
 
     starting_at = datetime.datetime.now()
@@ -61,9 +61,9 @@ def taximetro():
 
     while True:
         if is_driving == True:
-            selection = input("Actualmente estás CONDUCIENDO, escribe E cuando estés esperando, o Q para finalizar: ")
+            selection = input("Actualmente estás CONDUCIENDO, escribe E cuando estés esperando, o F para finalizar: ")
         else:
-            selection = input("Actualmente estás ESPERANDO, escribe C cuando estés conduciendo, o Q para finalizar: ")
+            selection = input("Actualmente estás ESPERANDO, escribe C cuando estés conduciendo, o F para finalizar: ")
 
         current_time = datetime.datetime.now()
         elapsed_time = (current_time - last_time).total_seconds()  # tiempo transcurrido desde el último cambio
@@ -78,7 +78,7 @@ def taximetro():
             is_driving = True
             last_time = current_time
 
-        elif selection == "Q":
+        elif selection == "F":
             if is_driving:
                 total_drived_total += elapsed_time
             else:
@@ -103,11 +103,11 @@ def taximetro():
                 taximetro()
             else:
                 print("\nGracias por usar el Taxímetro. Adios")
-                break
+                return
 
         else:
-            logging.error(f'Entrada no válida. Entradas aceptadas: D, E, Q.')
-            print("Entrada no válida, por favor ingresa 'C', 'E' o 'Q'.")
+            logging.error(f'Entrada no válida. Entradas aceptadas: D, E, F.')
+            print("Entrada no válida, por favor ingresa 'C', 'E' o 'F'.")
 
 taximetro()
 

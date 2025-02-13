@@ -2,6 +2,7 @@ import datetime
 import logging
 from logging_config import setup_logging
 
+setup_logging()
 
 # def format_time(seconds):
 #     minutes = int(seconds // 60)  # obtenemos los minutos
@@ -22,13 +23,16 @@ def taximetro():
 
     # si ingresamos un valor incorrecto, entramos en bucle hasta que sea correcto y ya seguimos con el codigo
     while True:
-        select_fee = input("Escriba A ó B: ")
+        select_fee = input("Escriba A ó B. (Q para salir): ")
         if select_fee == "A":
             base = 3.50
             break
         elif select_fee == "B":
             base = 4.50
             break
+        elif select_fee == "Q":
+            print("Gracias por usar el Taxímetro. Adios")
+            return
         else:
             logging.error(f'Selección inválida en select_fee: {select_fee}.')
             print("No ha seleccionado una opción correcta. Inténtelo de nuevo.")
@@ -108,7 +112,7 @@ def taximetro():
             logging.error(f'Entrada no válida. Entradas aceptadas: W, D, Q.')
             print("Entrada no válida, por favor ingresa 'W', 'D' o 'Q'.")
 
-#taximetro()
+taximetro()
 
 
 

@@ -44,7 +44,7 @@ def taximetro():
     total_waited_total = 0
 
     while True:
-        question = input("Quiere empezar el trayecto? (S ó N): ")
+        question = input("Quiere empezar el trayecto? (S ó N) (Q para salir): ")
         print("-----------------\n")
         if question == "S":
             is_driving = True
@@ -52,6 +52,9 @@ def taximetro():
         elif question == "N":
             is_driving = False
             break
+        elif question == "Q":
+            print("Gracias por usar el Taxímetro. Adios")
+            return
         else:
             logging.error(f'Selección inválida en question: {question} => Opciones válidas: S ó N.')
             print("No ha seleccionado ninguna opción correcta. Inténtelo de nuevo.")

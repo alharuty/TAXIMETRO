@@ -25,7 +25,7 @@ def taximetro():
                 print("\nGracias por usar el Taxímetro. Adios")
                 return
             else:
-                logging.error(f'Selección inválida en select_fee: {select_fee}.')
+                logging.error(f'Selección inválida en select_fee: {select_fee}. => Opciones Válidas A, B, Q')
                 print("No ha seleccionado una opción correcta. Inténtelo de nuevo. (A, B ó Q)")
 
         print("-----------------------------------------")
@@ -37,7 +37,7 @@ def taximetro():
 
         while True:
             print(f"\nVa a empezar el trayecto con la tarifa base: {base}€.")
-            question = input("\nC: Empezar CONDUCIENDO.\nE: Empezar ESPERANDO\nQ: Salir del trayecto\n\nEliga la opción deseada: ")
+            question = input("\nC: Empezar CONDUCIENDO.\nE: Empezar ESPERANDO\nQ: Salir de la app\n\nEliga la opción deseada: ")
             print("-----------------------------------------\n")
             if question == "C":
                 is_driving = True

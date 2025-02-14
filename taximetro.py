@@ -86,14 +86,12 @@ def taximetro():
 
                 print("\n-----------------------------------------")
 
-                total_drived_price =  total_drived_total * taxi_is_driving
-                total_waited_price = total_waited_total * taxi_is_waiting
-                total_total_price = total_drived_price + total_waited_price
+                total_total_price = (total_drived_total * taxi_is_driving) + (total_waited_total * taxi_is_waiting)
 
                 print(f"Tarifa base: {base}€")
                 print(f"Precio trayectoria: {total_total_price:.2f}€")
 
-                total_cost = base + (total_drived_total * taxi_is_driving) + (total_waited_total * taxi_is_waiting)
+                total_cost = base + total_total_price
 
                 mensaje = f"Precio total del viaje: {total_cost:.2f}€"
                 borde = "-" * (len(mensaje) + 2)

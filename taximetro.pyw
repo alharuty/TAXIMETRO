@@ -148,7 +148,7 @@ class Taximetro:
 
         Label(self.root, text=f"RESUMEN DEL VIAJE\n---------------------------------\n", font=("Arial", 12, "bold")).pack()
         Label(self.root, text=f"Tarifa base seleccionada: {self.tarifa_base}€\n", bg="#a6df9a").pack()
-        Label(self.root, text=f"Tiempo total conducido: {self.total_drived_total:.2f}\nTiempo total esperado: {self.total_waited_total:.2f}\n").pack()
+        Label(self.root, text=f"Precio trayectoria: {((self.total_drived_total * self.driving_price) + (self.total_waited_total * self.waiting_price)):.2f}€\n", bg="#a5df3a").pack()
         Label(self.root, text=f"Precio total del viaje: {total_price:.2f}€", font=("Arial", 12, "bold")).pack()
 
         Button(self.root, text="Reiniciar", command=self.restart_app).pack(pady=5)

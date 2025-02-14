@@ -62,3 +62,14 @@ Puedes ver el diagrama de actividad aquí:
 ❌ No guarda el historial de viajes cuando usamos la opción del terminal<br>
 
 
+### PRESENTACIÓN TÉCNICA
+
+Para el buen funcionamiento de la aplicación he utlizado controles de flujo mediante condicionales `if`, `elif`, `else` y `while`.<br>
+También he manejado el tiempo actual y transcurrido con la librería `import datetime`.
+<br>
+Y he usado la librería `import logging` para registrar errores de entrada en el terminal. 
+<br>
+La función principal se llama Taximetro() y permite:
+1. Seleccionar tairfa base entre diurna(3.50€) y tarifa nocturna(4.50€)
+2. Calcular tarifas de estado conducción (0.05€/s) y espera(0.02€/s)
+3. Devolver el precio total del trayecto.

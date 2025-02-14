@@ -55,6 +55,7 @@ Puedes ver el diagrama de actividad aquí:
 ✅ Cálculo basado en tiempo real y tarifas establecidas<br>
 ✅ Interfaz clara, mensajes detallados y organizados para una mejor experiencia<br>
 ✅ Sistema de logs si el usuario introduce una entrada inválida en el terminal<br>
+✅ Guarda historial de trayectos cuando usamos la interfaz gráfica
 
 ### Áreas a mejorar ❗
 ❌ Incluiría la opción de ingresar los km conducidos<br>

@@ -60,6 +60,13 @@ Puedes ver el diagrama de actividad aquí:
 ### Áreas a mejorar ❗
 ❌ Incluiría la opción de ingresar los km conducidos<br>
 ❌ No guarda el historial de viajes cuando usamos la opción del terminal<br>
+❌ Mejorar la interfaz gráfica<br>
+
+### Retos superados 💪
+✅ Aprender a crear una interfaz gráfica con la librería tkinter.<br>
+✅ Aprender a usar la librería logging para registrar errores de entrada en el terminal.<br>
+✅ Aprender a usar la librería datetime para manejar el tiempo actual y transcurrido.<br>
+✅ Aprender a usar Trello y organizarme por tareas y tiempos.<br>
 
 
 ### PRESENTACIÓN TÉCNICA

@@ -1,21 +1,4 @@
-2025-02-06 13:36:44,956 - ERROR - Selección inválida: j.
-2025-02-06 13:37:34,740 - ERROR - Selección inválida: G.
-2025-02-06 13:37:48,761 - ERROR - Selección inválida: L.
-2025-02-06 13:42:19,585 - INFO - Selección inválida: H.
-2025-02-06 13:45:45,299 - ERROR - Selección inválida en question: Q
-2025-02-07 11:44:07,273 - ERROR - Selección inválida en select_fee: d.
-2025-02-10 10:01:27,561 - ERROR - Selección inválida en select_fee: .
-2025-02-10 10:01:27,694 - ERROR - Selección inválida en select_fee: .
-2025-02-13 10:51:34,793 - ERROR - Selección inválida en select_fee: f.
-2025-02-13 10:51:35,575 - ERROR - Selección inválida en select_fee: d.
-2025-02-13 10:51:36,523 - ERROR - Selección inválida en select_fee: c.
-2025-02-13 11:10:02,780 - ERROR - Selección inválida en question: q => Opciones válidas: S ó N.
-2025-02-13 11:13:24,274 - ERROR - Selección inválida en question: r => Opciones válidas: C , E ó Q.
-2025-02-13 11:13:59,866 - ERROR - Entrada no válida. Entradas aceptadas: D, E, Q.
-2025-02-13 12:11:16,345 - ERROR - Entrada no válida. Entradas aceptadas: D, E, F.
-2025-02-13 12:13:34,364 - ERROR - Entrada no válida. Entradas aceptadas: D, E, F.
-2025-02-13 12:15:50,862 - ERROR - Entrada no válida. Entradas aceptadas: D, E, F.
-2025-02-13 12:17:06,334 - ERROR - Entrada no válida. Entradas aceptadas: D, E, F.
-2025-02-13 12:17:09,410 - ERROR - Entrada no válida. Entradas aceptadas: D, E, F.
-2025-02-13 13:34:39,080 - ERROR - Selección inválida en select_fee: .
-2025-02-13 14:14:48,545 - ERROR - Entrada no válida. Entradas aceptadas: D, E, F.
+2025-02-17 15:51:17,673 - WARNING - El usuario ha salido de la aplicación antes de especificar una tarifa.
+2025-02-17 15:51:27,516 - ERROR - Entrada no válida. Entradas aceptadas: D, E, F.
+2025-02-17 15:51:33,641 - INFO - Viaje finalizado recaudando 4.76€.
+2025-02-17 15:51:36,878 - INFO - El usuario ha terminado el viaje. Saliendo de la aplicación.

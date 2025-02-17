@@ -23,6 +23,7 @@ def taximetro():
                 break
             elif select_fee == "Q":
                 print("\nGracias por usar el Taxímetro. Adios")
+                logging.warning('El usuario ha salido de la aplicación antes de especificar una tarifa.')
                 return
             else:
                 logging.error(f'Selección inválida en select_fee: {select_fee}. => Opciones Válidas A, B, Q')
@@ -100,15 +101,17 @@ def taximetro():
                 print(f"│ {mensaje} │")
                 print("╰" + borde + "╯")
                 print("------------------------------------------")
+                logging.info(f"Viaje finalizado recaudando {total_cost:.2f}€.")
                 answer = input("Quiere volver a empezar un viaje? (S ó N): ")
                 if answer == "S":
                     break
                 elif answer == "N":
                     print("\nGracias por usar el Taxímetro. Adios")
+                    logging.info('El usuario ha terminado el viaje. Saliendo de la aplicación.')
                     return
 
             else:
-                logging.error(f'Entrada no válida. Entradas aceptadas: D, E, F.')
+                logging.error(f'Entrada no válida. Entradas aceptadas: C, E, F.')
                 print("Entrada no válida, por favor ingresa 'C', 'E' o 'F'.")
 
 taximetro()

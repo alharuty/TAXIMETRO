@@ -41,7 +41,7 @@ Carácteres válidos en el terminal:
 | N      | Salir de la app                 |
 
 
-En ambos métodos se puede salir de la app en cualquier momento ó volver a realizar un nuevo trayecto. El programa tiene una interfaz amigable basada en texto, permite a los usuarios seleccionar una tarifa (diurna o nocturna) y dependiendo si el taxi está conduciendo o esperando se cobra una tarifa de 0.05 céntimos y 0.02 céntimos por minuto respectivamente.<br>
+En ambos métodos se puede salir de la app en cualquier momento ó volver a realizar un nuevo trayecto. El programa tiene una interfaz amigable basada en texto, permite a los usuarios seleccionar una tarifa (diurna o nocturna) y dependiendo si el taxi está conduciendo o esperando se cobra una tarifa de 0.05 céntimos y 0.02 céntimos por segundo respectivamente.<br>
 Al final del trayecto, el sistema muestra un resúmen del precio total, incluyendo tarifa base y el total de la trayectoria.
 
 Además en la version GUI, se guarda un historial de trayectos en el archivo historial.txt
